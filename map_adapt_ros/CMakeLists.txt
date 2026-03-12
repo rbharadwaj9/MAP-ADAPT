@@ -7,7 +7,7 @@ catkin_simple(ALL_DEPS_REQUIRED)
 add_definitions(-std=c++14 -Wall -Wextra)
 
 find_package(PCL REQUIRED)
-find_package(OpenCV 3.4.15 REQUIRED)
+find_package(OpenCV REQUIRED)
 
 #############
 # LIBRARIES #
