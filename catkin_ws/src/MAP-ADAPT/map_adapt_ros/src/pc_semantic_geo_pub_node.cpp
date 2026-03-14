@@ -141,6 +141,7 @@ int main(int argc, char **argv) {
   LoadPoses(root_dir + "/gt_pose_calibrated.txt", TimeStamps_gt, poses_gt);
 
   int idx = 0;
+
   ros::Rate loop_rate(rate);
 
   ros::Duration(wait_time).sleep();
@@ -267,10 +268,10 @@ int main(int argc, char **argv) {
     PointCloudCurrent.header.stamp = ros::Time(TimeStamps[idx]);
     pcl_pub.publish(PointCloudCurrent);
 
-    // sensor_msgs::ImagePtr imageMsg =
-    //     cv_bridge::CvImage(std_msgs::Header(), "bgr8", imRGB).toImageMsg();
-    // imageMsg->header.frame_id = "world";
-    // image_pub.publish(imageMsg);
+    sensor_msgs::ImagePtr imageMsg =
+        cv_bridge::CvImage(std_msgs::Header(), "bgr8", imRGB).toImageMsg();
+    imageMsg->header.frame_id = "map";
+    image_pub.publish(imageMsg);
 
     loop_rate.sleep();
 

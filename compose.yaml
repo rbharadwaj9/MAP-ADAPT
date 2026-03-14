@@ -1,0 +1,29 @@
+services:
+  map_adapt:
+    build: .
+    container_name: map_adapt
+    network_mode: host
+    privileged: true
+    gpus: all
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+
+    volumes:
+      # X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # Your workspace
+      - ./catkin_ws/src/MAP-ADAPT:/catkin_ws/src/MAP-ADAPT
+
+      # Datasets
+      - ./datasets:/dataset
+
+      # Optional: share home configs
+      - ~/.Xauthority:/root/.Xauthority:rw
+
+    working_dir: /catkin_ws
+
+    stdin_open: true
+    tty: true

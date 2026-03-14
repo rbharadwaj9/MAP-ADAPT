@@ -1,0 +1,15 @@
+datasets/
+assets/
+
+.git/
+
+catkin_ws/build/
+catkin_ws/log/
+catkin_ws/devel/
+catkin_ws/install/
+
+*.bag
+*.db3
+
+__pycache__/
+*.pyc

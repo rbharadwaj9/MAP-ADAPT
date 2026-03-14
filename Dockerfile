@@ -46,13 +46,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN sudo apt install -y ros-noetic-pcl-ros
 
 WORKDIR /catkin_ws
+COPY catkin_ws/src/MAP-ADAPT/map_adapt_ros/package.xml /catkin_ws/src/MAP-ADAPT/map_adapt_ros/package.xml
+COPY catkin_ws/src/MAP-ADAPT/voxblox/package.xml /catkin_ws/src/MAP-ADAPT/voxblox/package.xml
+COPY catkin_ws/src/MAP-ADAPT/voxblox_msgs/package.xml /catkin_ws/src/MAP-ADAPT/voxblox_msgs/package.xml
+COPY catkin_ws/src/MAP-ADAPT/voxblox_rviz_plugin/package.xml /catkin_ws/src/MAP-ADAPT/voxblox_rviz_plugin/package.xml
 RUN rosdep update && rosdep install --from-paths src --ignore-src -r -y
 
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY . ./src/MAP-ADAPT
 
+RUN echo "source /catkin_ws/devel/setup.bash" >> ~/.bashrc
+
 CMD sleep infinity
-#
-# RUN catkin build map_adapt_ros && \
-#     source ../devel/setup.bash
